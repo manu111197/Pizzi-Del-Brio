@@ -40,6 +40,22 @@ public class RichiestaRegistrazioneDAO implements IRichiestaRegistrazioneDAO {
 
     }
 
+    @Override
+    public RichiestaRegistrazione findByUtente(String email) {
+        ArrayList<String[]> risultato = DbConnection.getInstance().eseguiQuery("SELECT * FROM Richiesta_registrazione WHERE Utente_email ='" + email + "';" );
+
+        if (risultato.size() == 0) return null;
+
+        RichiestaRegistrazione r = new RichiestaRegistrazione();
+
+        String[] riga = risultato.get(0);
+        r.setId(Integer.parseInt(riga[0]));
+        r.setStato(riga[1]);
+        r.setUtente(UtenteDAO.getInstance().findByEmail(riga[2]));
+        r.setAmministratore(AmministratoreDAO.getInstance().findByEmail(riga[3]));
+
+        return r;    }
+
 
     @Override
     public ArrayList<RichiestaRegistrazione> findAll() {
@@ -63,7 +79,7 @@ public class RichiestaRegistrazioneDAO implements IRichiestaRegistrazioneDAO {
         }
         return listaRichiestaRegistrazioni;
     }
-
+     //public void InserimentoRichieste insertrequest();
 }
 
 

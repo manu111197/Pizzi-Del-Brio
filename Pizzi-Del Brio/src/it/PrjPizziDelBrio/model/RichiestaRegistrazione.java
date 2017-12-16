@@ -6,6 +6,7 @@ public class RichiestaRegistrazione {
     private Utente utente;
     private Amministratore amministratore;
 
+
     public Utente getUtente() {
         return utente;
     }

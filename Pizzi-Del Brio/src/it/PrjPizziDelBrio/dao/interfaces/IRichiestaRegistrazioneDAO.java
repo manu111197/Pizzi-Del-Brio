@@ -8,7 +8,8 @@ import it.PrjPizziDelBrio.model.RichiestaRegistrazione;
 public interface IRichiestaRegistrazioneDAO extends IBaseDAO<RichiestaRegistrazione> {
 
     RichiestaRegistrazione findById (int id);
-    //RichiestaRegistrazione findByUtente(String email);
+    RichiestaRegistrazione findByUtente(String email);
+
 
 
 }

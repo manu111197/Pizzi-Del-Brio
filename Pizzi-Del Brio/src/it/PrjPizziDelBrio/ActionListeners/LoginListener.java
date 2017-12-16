@@ -2,11 +2,14 @@ package it.PrjPizziDelBrio.ActionListeners;
 
 import it.PrjPizziDelBrio.business.PersonaBusiness;
 
+import it.PrjPizziDelBrio.dao.mysql.RichiestaRegistrazioneDAO;
 import it.PrjPizziDelBrio.model.Amministratore;
 import it.PrjPizziDelBrio.model.GestoreCatalogo;
 import it.PrjPizziDelBrio.model.Persona;
 
 import it.PrjPizziDelBrio.model.Utente;
+import it.PrjPizziDelBrio.view.AmministratoreFrame;
+import it.PrjPizziDelBrio.view.GestoreCatalogoFrame;
 import it.PrjPizziDelBrio.view.LoginFrame;
 
 import javax.swing.*;
@@ -46,7 +49,7 @@ public class LoginListener implements ActionListener {
 
                 if (p != null) {
                     System.out.println("LOGIN OK!");
-                    if (p instanceof Utente) {
+                    if (p instanceof Utente && RichiestaRegistrazioneDAO.getInstance().findByUtente(p.getNome()).getStato().equals("confermata")) {
                         //apriremo la view dell'utente
                         //finestra.setVisible(false);
                         Utente u = (Utente) p;
@@ -58,15 +61,19 @@ public class LoginListener implements ActionListener {
                         //finestra.setVisible(false);
                         Amministratore a = (Amministratore) p;
                         System.out.println("Benvenuto amministratore " + a.getNome() + " " + a.getCognome() + "!");
-                        JOptionPane.showMessageDialog(null,"Benvenuto amministratore " + a.getNome() + " " + a.getCognome() + "!");
+                //        JOptionPane.showMessageDialog(null,"Benvenuto amministratore " + a.getNome() + " " + a.getCognome() + "!");
+                        finestra.setVisible(false);
+                        new AmministratoreFrame(a);
+
 
                     } else if (p instanceof GestoreCatalogo) {
                         //apriremo la view del gestore catalogo
                         //finestra.setVisible(false);
                         GestoreCatalogo g = (GestoreCatalogo) p;
                         System.out.println("Benvenuto gestore catalogo " + g.getNome() + " " + g.getCognome() + "!");
-                        JOptionPane.showMessageDialog(null,"Benvenuto gestore catalogo " + g.getNome() + " " + g.getCognome() + "!");
-
+                        //JOptionPane.showMessageDialog(null,"Benvenuto gestore catalogo " + g.getNome() + " " + g.getCognome() + "!");
+                        finestra.setVisible(false);
+                        new GestoreCatalogoFrame(g);
                     }
 
 

@@ -5,9 +5,6 @@ import it.PrjPizziDelBrio.ActionListeners.LoginListener;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by roberto on 06/12/2017.
- */
 public class LoginFrame extends JFrame {
 
     private JTextField txtEmail = new JTextField();
@@ -17,6 +14,11 @@ public class LoginFrame extends JFrame {
         super("Nuova finestra");
         Container c = getContentPane();
 
+
+
+       Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
+        Dimension frameSize = this.getSize ();
+        this.setLocation ((screenSize.width/2) - frameSize.width/2-250 , (screenSize.height/2) - frameSize.height/2-100 );
         /*
         c.add(new JLabel("Buona lezione"));
         c.add(new JButton(("Cliccami")));
@@ -80,7 +82,9 @@ public class LoginFrame extends JFrame {
         setJMenuBar(bar);
 
 
-        setSize(400,150);
+        setSize(500,150);
+
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
