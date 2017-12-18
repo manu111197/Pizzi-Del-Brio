@@ -21,9 +21,13 @@ public class GestioneRichiesteFrame extends JFrame {
         c.add(new JScrollPane(richieste),BorderLayout.CENTER);
 
 
+        JPanel sud = new JPanel(new FlowLayout());
+        JButton confermaRichieste=new JButton("Conferma");
+        sud.add(confermaRichieste);
+        JButton negaRichieste=new JButton("Nega");
+        sud.add(negaRichieste);
 
-
-
+        c.add(sud, BorderLayout.SOUTH);
 
 
         Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();

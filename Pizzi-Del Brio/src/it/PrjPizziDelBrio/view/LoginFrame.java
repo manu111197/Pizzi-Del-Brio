@@ -1,14 +1,19 @@
 package it.PrjPizziDelBrio.view;
 
 import it.PrjPizziDelBrio.ActionListeners.LoginListener;
+import it.PrjPizziDelBrio.model.Utente;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginFrame extends JFrame {
 
     private JTextField txtEmail = new JTextField();
     private JPasswordField txtPassword = new JPasswordField();
+    private Utente u;
+
 
     public LoginFrame() {
         super("Nuova finestra");
@@ -16,7 +21,7 @@ public class LoginFrame extends JFrame {
 
 
 
-       Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
+        Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
         Dimension frameSize = this.getSize ();
         this.setLocation ((screenSize.width/2) - frameSize.width/2-250 , (screenSize.height/2) - frameSize.height/2-100 );
         /*
@@ -82,6 +87,18 @@ public class LoginFrame extends JFrame {
         setJMenuBar(bar);
 
 
+        LoginFrame _this= this;
+        JButton registrazione= new JButton("Registrati");
+        sud.add(registrazione);
+        registrazione.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                _this.setVisible(false);
+                new RegistrazioneFrame(u);
+            }
+        });
+
+
         setSize(500,150);
 
 
@@ -90,7 +107,7 @@ public class LoginFrame extends JFrame {
     }
 
 
-    public JTextField getTxtUsername() {
+    public JTextField getTxtEmail() {
         return txtEmail;
     }
 

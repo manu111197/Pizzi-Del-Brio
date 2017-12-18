@@ -5,12 +5,15 @@ import it.PrjPizziDelBrio.model.GestoreCatalogo;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GestoreCatalogoFrame extends JFrame {
     private GestoreCatalogo g;
     public GestoreCatalogoFrame(GestoreCatalogo g){
         super("Finesta Gestore Catalogo");
         this.g=g;
+        GestoreCatalogoFrame _this = this;
         Container c=getContentPane();
         c.setLayout(new BorderLayout());
         Dimension screenSize = Toolkit.getDefaultToolkit ().getScreenSize ();
@@ -32,6 +35,15 @@ public class GestoreCatalogoFrame extends JFrame {
         sud.setLayout(new FlowLayout());
         JButton btnlogout=new JButton("Logout");
         sud.add(btnlogout);
+        btnlogout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                _this.setVisible(false);
+                new LoginFrame();
+
+
+            }
+        });
         JButton inserisciCategoria=new JButton("Inserisci categoria");
         sud.add(inserisciCategoria);
 

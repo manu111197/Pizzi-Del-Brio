@@ -26,9 +26,7 @@ public class AmministratoreFrame extends JFrame {
         nord.add(lblBenvenuto);
         c.add(nord,BorderLayout.NORTH);
 
-        this.setVisible(true);
-        this.setSize(750,360);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
         AmministratoreFrame _this = this;
         JPanel sud=new JPanel();
         sud.setLayout(new FlowLayout());
@@ -43,29 +41,29 @@ public class AmministratoreFrame extends JFrame {
 
             }
         });
-
-
-
         JButton gestioneRichieste=new JButton("Gestione richieste");
+        sud.add(gestioneRichieste);
         gestioneRichieste.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 _this.setVisible(false);
                 new GestioneRichiesteFrame(a);
 
-
-
-
             }
         });
-        sud.add(gestioneRichieste);
+
+
+
+
 
         c.add(sud, BorderLayout.SOUTH);
 
 
 
 
-
+        this.setVisible(true);
+        this.setSize(750,360);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         //gestioneRichieste.addActionListener();
        // sud.add(gestioneRichieste);

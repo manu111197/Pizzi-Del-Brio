@@ -1,5 +1,6 @@
 package it.PrjPizziDelBrio.dao.mysql;
 
+
 import it.PrjPizziDelBrio.dao.interfaces.IUtenteDAO;
 import it.PrjPizziDelBrio.dbInterface.DbConnection;
 import it.PrjPizziDelBrio.model.Utente;
@@ -62,4 +63,12 @@ public class UtenteDAO implements IUtenteDAO {
         return listaUtenti;
 
     }
+    public void inserimentoUtenti(String email,byte[] password,String nome,String cognome,String indirizzo,String cellulare){
+        DbConnection.getInstance().eseguiAggiornamento("INSERT INTO Utente (email,password,nome,cognome,indirizzo,numero_telefono) " +
+                "VALUES ('"+email+"','"+new String(password)+"','"+nome+"','"+cognome+"','"+indirizzo+"','"+cellulare+"');");
+
+
+    }
+
+
 }

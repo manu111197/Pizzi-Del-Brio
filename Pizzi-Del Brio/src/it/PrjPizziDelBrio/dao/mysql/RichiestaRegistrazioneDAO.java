@@ -42,7 +42,7 @@ public class RichiestaRegistrazioneDAO implements IRichiestaRegistrazioneDAO {
 
     @Override
     public RichiestaRegistrazione findByUtente(String email) {
-        ArrayList<String[]> risultato = DbConnection.getInstance().eseguiQuery("SELECT * FROM Richiesta_registrazione WHERE Utente_email ='" + email + "';" );
+        ArrayList<String[]> risultato = DbConnection.getInstance().eseguiQuery("SELECT * FROM richiesta_registrazione WHERE Utente_email ='" + email + "';" );
 
         if (risultato.size() == 0) return null;
 
@@ -79,7 +79,16 @@ public class RichiestaRegistrazioneDAO implements IRichiestaRegistrazioneDAO {
         }
         return listaRichiestaRegistrazioni;
     }
-     //public void InserimentoRichieste insertrequest();
+     public void inserimentoRichieste(String utEmail, String ammEmail){
+
+        DbConnection.getInstance().eseguiAggiornamento("INSERT INTO richiesta_registrazione (stato_registrazione,Utente_email,Amministratore_email) " +
+                "VALUES ('Pending','"+utEmail+"','"+ammEmail+"');");
+
+    }
+
+
+
+
 }
 
 
