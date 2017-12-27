@@ -34,7 +34,7 @@ public class RegistrazioneFrame extends JFrame {
 
 
 
-        RegistrazioneListener listener = new RegistrazioneListener(this);
+        RegistrazioneListener listener = new RegistrazioneListener(this,u);
         JPanel centro = new JPanel();
         centro.setLayout(new GridLayout(6,2));
         JLabel lblEmail = new JLabel("Email:");
@@ -89,7 +89,7 @@ public class RegistrazioneFrame extends JFrame {
                 _this.setVisible(false);
                 UtenteBusiness.getInstance().inserimentoUtenti(txtEmail.getText(),txtPassword.getText().getBytes(),txtNome.getText(),txtCognome.getText(),txtIndirizzo.getText(),txtCellulare.getText());
                 RichiestaRegistrazioneBusiness.getInstance().inserimentoRichieste(txtEmail.getText(),"m");
-                JOptionPane.showMessageDialog(null,"Registrazione inviata.");
+
                 new LoginFrame();
                 }
         });

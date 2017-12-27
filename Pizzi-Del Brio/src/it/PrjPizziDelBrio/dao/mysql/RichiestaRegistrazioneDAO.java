@@ -87,7 +87,10 @@ public class RichiestaRegistrazioneDAO implements IRichiestaRegistrazioneDAO {
     }
 
 
+   public void changeStato(String email,String stato){
 
+       DbConnection.getInstance().eseguiAggiornamento("UPDATE richiesta_registrazione SET stato_registrazione = '"+stato+"' WHERE Utente_email='"+email+"';");
+   }
 
 }
 

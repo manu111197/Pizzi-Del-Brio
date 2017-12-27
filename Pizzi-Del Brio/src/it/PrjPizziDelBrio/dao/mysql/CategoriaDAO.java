@@ -21,7 +21,7 @@ public class CategoriaDAO implements ICategoriaDAO {
     @Override
     public Categoria findByNome(String nome){
 
-        ArrayList<String []> risultato = DbConnection.getInstance().eseguiQuery("SELECT * FROM Categoria WHERE nome="+nome);
+        ArrayList<String []> risultato = DbConnection.getInstance().eseguiQuery("SELECT * FROM Categoria WHERE nome="+nome+ "';");
 
         if (risultato.size()==0) return null;
 
@@ -29,6 +29,7 @@ public class CategoriaDAO implements ICategoriaDAO {
 
         String[] riga= risultato.get(0);
         c.setNome(riga[0]);
+        c.setGestoreCatalogo(GestoreCatalogoDAO.getInstance().findByEmail((riga[1])));
 
         return c;
 
@@ -46,12 +47,17 @@ public class CategoriaDAO implements ICategoriaDAO {
             String[] riga = i.next();
             Categoria c = new Categoria();
             c.setNome(riga[0]);
+            c.setGestoreCatalogo(GestoreCatalogoDAO.getInstance().findByEmail((riga[1])));
             listaCategorie.add(c);
 
         }
         return listaCategorie;
 
 
+    }
+    public void insertCategoria(String nome,String gcemail){
+        DbConnection.getInstance().eseguiAggiornamento("INSERT INTO Categoria (nome,Gestore_Catalogo_email)" +
+                "VALUES  ('"+nome+"','"+gcemail+"');");
     }
 
 

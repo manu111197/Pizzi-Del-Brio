@@ -1,14 +1,13 @@
 package it.PrjPizziDelBrio.ActionListeners;
 
+import it.PrjPizziDelBrio.business.CarrelloBusiness;
 import it.PrjPizziDelBrio.business.PersonaBusiness;
 
 import it.PrjPizziDelBrio.business.UtenteBusiness;
 import it.PrjPizziDelBrio.dao.mysql.RichiestaRegistrazioneDAO;
-import it.PrjPizziDelBrio.model.Amministratore;
-import it.PrjPizziDelBrio.model.GestoreCatalogo;
-import it.PrjPizziDelBrio.model.Persona;
+import it.PrjPizziDelBrio.dao.mysql.UtenteDAO;
+import it.PrjPizziDelBrio.model.*;
 
-import it.PrjPizziDelBrio.model.Utente;
 import it.PrjPizziDelBrio.view.AmministratoreFrame;
 import it.PrjPizziDelBrio.view.GestoreCatalogoFrame;
 import it.PrjPizziDelBrio.view.LoginFrame;
@@ -39,12 +38,14 @@ public class LoginListener implements ActionListener {
                 || e.getSource() instanceof  JPasswordField) {
 
             //String username = "mario.rossi";
-            //byte[] password = "Passw0rd1".getBytes();
-
+            //byte[] password = "Passw0rd1".getBytes()
             String email = finestra.getTxtEmail().getText();
             byte[] password = new String(finestra.getTxtPassword().getPassword()).getBytes();
 
+
+
             Persona p = PersonaBusiness.getInstance().login(email, password);
+
 
 
                 if (p != null) {
@@ -57,6 +58,7 @@ public class LoginListener implements ActionListener {
                         if(UtenteBusiness.getInstance().isRegistrato(u)) {
                             System.out.println("Benvenuto utente " + u.getNome() + " " + u.getCognome() + "!");
                             JOptionPane.showMessageDialog(null, "Benvenuto utente " + u.getNome() + " " + u.getCognome() + "!");
+                            CarrelloBusiness.getInstance().inserimentoCarrello(email);
                         }else
                             JOptionPane.showMessageDialog(null, "Utente non registrato");
 

@@ -44,8 +44,25 @@ public class GestoreCatalogoFrame extends JFrame {
 
             }
         });
-        JButton inserisciCategoria=new JButton("Inserisci categoria");
-        sud.add(inserisciCategoria);
+
+        JButton gestioneCategorie=new JButton("Gestione Categorie");
+        sud.add(gestioneCategorie);
+        gestioneCategorie.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                _this.setVisible(false);
+                new ListaCategorieFrame(g);
+            }
+        });
+        JButton gestioneProdotti=new JButton("Gestione Prodotti");
+        sud.add(gestioneProdotti);
+        gestioneProdotti.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              _this.setVisible(false);
+              new ProdottoSetupFrame(g);
+            }
+        });
 
         c.add(sud, BorderLayout.SOUTH);
 

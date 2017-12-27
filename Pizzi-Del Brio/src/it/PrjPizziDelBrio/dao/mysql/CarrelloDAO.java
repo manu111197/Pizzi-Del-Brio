@@ -4,6 +4,7 @@ package it.PrjPizziDelBrio.dao.mysql;
 import it.PrjPizziDelBrio.dao.interfaces.ICarrelloDAO;
 import it.PrjPizziDelBrio.dbInterface.DbConnection;
 import it.PrjPizziDelBrio.model.Carrello;
+import it.PrjPizziDelBrio.model.Utente;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,6 +30,7 @@ public class CarrelloDAO implements ICarrelloDAO {
 
         String[] riga= risultato.get(0);
         c.setId(Integer.parseInt(riga[0]));
+        c.setUtente(UtenteDAO.getInstance().findByEmail(riga[1]));
         return c;
 
     }
@@ -45,10 +47,20 @@ public class CarrelloDAO implements ICarrelloDAO {
             String[] riga = i.next();
             Carrello c = new Carrello();
             c.setId(Integer.parseInt(riga[0]));
+            c.setUtente(UtenteDAO.getInstance().findByEmail(riga[1]));
             listaCarrello.add(c);
 
         }
         return listaCarrello;
     }
+    public void insertCarrello( String utEmail){
+
+        DbConnection.getInstance().eseguiAggiornamento("INSERT INTO Carrello (idCarrello,Utente_email) " +
+                "VALUES ('"+utEmail+"');");
+
+    }
+
+
+
 }
 

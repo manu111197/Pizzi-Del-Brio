@@ -26,7 +26,10 @@ public class UtenteBusiness {
 
     }
     public void inserimentoUtenti(String email,byte[] password,String nome,String cognome,String indirizzo,String cellulare){
+
+        if(UtenteDAO.getInstance().findByEmail(email)==null)
         UtenteDAO.getInstance().inserimentoUtenti(email,password,nome,cognome,indirizzo,cellulare);
+
     }
 
 }

@@ -6,36 +6,36 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
-public class CategoriaTableModel extends AbstractTableModel {
+public class ListaCategorieTableModel extends AbstractTableModel {
 
-    private ArrayList<Categoria> Categoria;
-    public CategoriaTableModel(ArrayList<Categoria> Categoria) {
+    private ArrayList<Categoria> Categorie;
+    public ListaCategorieTableModel(ArrayList<Categoria> Categorie) { this.Categorie=Categorie;}
 
-        this.Categoria=Categoria;}
-
-    String[] columnsNames = new String[] {"Nome"};
+    String[] columnsNames = new String[] {"Categoria","Gestore Catalogo"};
 
     @Override
     public String getColumnName(int columnIndex){
         return columnsNames[columnIndex];
     }
     @Override
-    public int getRowCount() {return Categoria.size(); }
+    public int getRowCount() {return Categorie.size(); }
 
     @Override
     public int getColumnCount() {
-        return 1;
+        return 2;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Categoria c=Categoria.get(rowIndex);
+        Categoria c=Categorie.get(rowIndex);
         switch(columnIndex) {
             case 0: return c.getNome();
+            case 1:return c.getGestoreCatalogo().getEmail();
             default: return null;
         }
+
     }
-    //JScrollPane jsp = new JScrollPane();
+   // JScrollPane jsp = new JScrollPane();
 }
 
 

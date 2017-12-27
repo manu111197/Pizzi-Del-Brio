@@ -11,22 +11,22 @@ public class ProdottoDAO implements IProdottoDAO {
     //singleton desing pattern
     private static ProdottoDAO instance;
 
-    public  static ProdottoDAO getInstance(){
-        if(instance==null)
-            instance=new ProdottoDAO();
+    public static ProdottoDAO getInstance() {
+        if (instance == null)
+            instance = new ProdottoDAO();
         return instance;
     }
 
     @Override
-    public Prodotto findByNome(String nome){
+    public Prodotto findByNome(String nome) {
 
-        ArrayList<String []> risultato = DbConnection.getInstance().eseguiQuery("SELECT * FROM Prodotto WHERE nome="+nome);
+        ArrayList<String[]> risultato = DbConnection.getInstance().eseguiQuery("SELECT * FROM Prodotto WHERE nome=" + nome);
 
-        if (risultato.size()==0) return null;
+        if (risultato.size() == 0) return null;
 
-        Prodotto p=new Prodotto();
+        Prodotto p = new Prodotto();
 
-        String[] riga= risultato.get(0);
+        String[] riga = risultato.get(0);
         p.setNome(riga[0]);
         p.setDescrizione(riga[1]);
         p.setPrezzo(riga[2]);
@@ -37,18 +37,18 @@ public class ProdottoDAO implements IProdottoDAO {
 
         ArrayList<Prodotto> prodottiContenuti = new ArrayList<Prodotto>();
 
-        ArrayList<String[]> risultato2 =  DbConnection.getInstance().eseguiQuery("SELECT nome, descrizione, prezzo, Carrello_idCarrello, Categoria_nome, Produttore_idProduttore, Distributore_idDistributore "+
-               "FROM prodotto_has_prodotto as PC"+
-                "JOIN  prodotto as P "+
-                "on  PC.Prodotto_Contenuto = P.nome "+
+        ArrayList<String[]> risultato2 = DbConnection.getInstance().eseguiQuery("SELECT nome, descrizione, prezzo, Carrello_idCarrello, Categoria_nome, Produttore_idProduttore, Distributore_idDistributore " +
+                "FROM prodotto_has_prodotto as PC" +
+                "JOIN  prodotto as P " +
+                "on  PC.Prodotto_Contenuto = P.nome " +
                 "WHERE PC.Prodotto_Composto=" + nome);
 
-        if(risultato2.size() != 0) {
+        if (risultato2.size() != 0) {
             Iterator<String[]> i = risultato2.iterator();
-            while(i.hasNext()) {
+            while (i.hasNext()) {
                 String[] riga2 = i.next();
 
-                Prodotto p2=new Prodotto();
+                Prodotto p2 = new Prodotto();
 
                 p2.setNome(riga2[0]);
                 p2.setDescrizione(riga2[1]);
@@ -65,6 +65,7 @@ public class ProdottoDAO implements IProdottoDAO {
         return p;
 
     }
+
     @Override
     public ArrayList<Prodotto> findAll() {
 
@@ -87,18 +88,18 @@ public class ProdottoDAO implements IProdottoDAO {
 
             ArrayList<Prodotto> prodottiContenuti = new ArrayList<Prodotto>();
 
-            ArrayList<String[]> risultato2 =  DbConnection.getInstance().eseguiQuery("SELECT nome, descrizione, prezzo, Carrello_idCarrello, Categoria_nome, Produttore_idProduttore, Distributore_idDistributore "+
-                    "FROM prodotto_has_prodotto as PC"+
-                    "JOIN  prodotto as P "+
-                    "on  PC.Prodotto_Contenuto = P.nome "+
+            ArrayList<String[]> risultato2 = DbConnection.getInstance().eseguiQuery("SELECT nome, descrizione, prezzo, Carrello_idCarrello, Categoria_nome, Produttore_idProduttore, Distributore_idDistributore " +
+                    "FROM prodotto_has_prodotto as PC" +
+                    "JOIN  prodotto as P " +
+                    "on  PC.Prodotto_Contenuto = P.nome " +
                     "WHERE PC.Prodotto_Composto=" + riga[0]);
 
-            if(risultato2.size() != 0) {
+            if (risultato2.size() != 0) {
                 Iterator<String[]> j = risultato2.iterator();
-                while(j.hasNext()) {
+                while (j.hasNext()) {
                     String[] riga2 = j.next();
 
-                    Prodotto p2=new Prodotto();
+                    Prodotto p2 = new Prodotto();
 
                     p2.setNome(riga2[0]);
                     p2.setDescrizione(riga2[1]);
@@ -122,6 +123,14 @@ public class ProdottoDAO implements IProdottoDAO {
 
     }
 
+    public void insertProdotti(String nome, String descrizione, String prezzo,int idCarrello,String categoria, int idprod, int iddist) {
 
-
+        DbConnection.getInstance().eseguiAggiornamento("INSERT INTO Prodotto (nome,descrizione,prezzo,Carrello_idCarrello,Categoria_nome,Produttore_idProduttore,Distributore_idDistributore)" +
+                "VALUES '" + nome + "','" + descrizione + "','" + prezzo + "','" + idCarrello + "','" + categoria + "','" + idprod + "','" + iddist + "');");
     }
+
+}
+
+
+
+
