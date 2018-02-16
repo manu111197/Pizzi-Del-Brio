@@ -5,11 +5,11 @@ import it.PrjPizziDelBrio.model.Prodotto;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
-public class ListaProdottiTableModel extends AbstractTableModel {
+public class CatalogoTableModel extends AbstractTableModel {
     private ArrayList<Prodotto> Prodotti;
-    public ListaProdottiTableModel(ArrayList<Prodotto> Prodotti) { this.Prodotti=Prodotti;}
+    public CatalogoTableModel(ArrayList<Prodotto> Prodotti) { this.Prodotti=Prodotti;}
 
-    String[] columnsNames = new String[] {"Nome","Descrizione","Prezzo","Url Immagine","Sconto","Categoria","Id Distributore","Id Produttore"};
+    String[] columnsNames = new String[] {"Nome","Prezzo","Categoria"};
     @Override
     public String getColumnName(int columnIndex){
         return columnsNames[columnIndex];
@@ -21,7 +21,7 @@ public class ListaProdottiTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 8;
+        return 3;
     }
 
     @Override
@@ -29,13 +29,8 @@ public class ListaProdottiTableModel extends AbstractTableModel {
         Prodotto p=Prodotti.get(rowIndex);
         switch(columnIndex) {
             case 0: return p.getNome();
-            case 1: return p.getDescrizione();
-            case 2: return "€"+p.getPrezzo();
-            case 3: return p.getImmagine();
-            case 4: return p.getSconto()+"%";
-            case 5: return p.getCategoria().getNome();
-            case 6: return p.getDistributore().getId();
-            case 7: return p.getProduttore().getId();
+            case 1: return p.getPrezzo();
+            case 2: return p.getCategoria().getNome();
             default: return null;
         }
     }

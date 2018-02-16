@@ -16,6 +16,8 @@ public class ProdottoSetupFrame extends JFrame {
     private JTextField txtNome= new JTextField();
     private JTextField txtDescrzione= new JTextField();
     private JTextField txtPrezzo= new JTextField();
+    private JTextField txtImmagine=new JTextField();
+    private JTextField txtSconto=new JTextField();
 
     private JTextField txtCategoria=new JTextField();
     private JTextField txtidProduttore= new JTextField();
@@ -31,11 +33,13 @@ public class ProdottoSetupFrame extends JFrame {
 
         ProdottoListener listener = new ProdottoListener(this, g);
         JPanel centro = new JPanel();
-        centro.setLayout(new GridLayout(6, 2));
+        centro.setLayout(new GridLayout(8, 2));
         JLabel lblNome = new JLabel("Nome Prodotto:");
         JLabel lblDescrizione = new JLabel("Descrizione:");
         JLabel lblPrezzo = new JLabel("Prezzo:");
-        JLabel lblCategoria=new JLabel("Categoria appartenente");
+        JLabel lblImmagine=new JLabel("Url immagine");
+        JLabel lblSconto=new JLabel("Sconto eventuale:");
+        JLabel lblCategoria=new JLabel("Categoria:");
         JLabel lblidProduttore = new JLabel("Prodottore:");
         JLabel lblidDistributore = new JLabel("Distributore:");
 
@@ -45,6 +49,10 @@ public class ProdottoSetupFrame extends JFrame {
         centro.add(txtDescrzione);
         centro.add(lblPrezzo);
         centro.add(txtPrezzo);
+        centro.add(lblImmagine);
+        centro.add(txtImmagine);
+        centro.add(lblSconto);
+        centro.add(txtSconto);
         centro.add(lblCategoria);
         centro.add(txtCategoria);
         centro.add(lblidProduttore);
@@ -54,6 +62,8 @@ public class ProdottoSetupFrame extends JFrame {
         txtNome.addActionListener(listener);
         txtDescrzione.addActionListener(listener);
         txtPrezzo.addActionListener(listener);
+        txtImmagine.addActionListener(listener);
+        txtSconto.addActionListener(listener);
         txtCategoria.addActionListener(listener);
         txtidProduttore.addActionListener(listener);
         txtidDistributore.addActionListener(listener);
@@ -62,15 +72,15 @@ public class ProdottoSetupFrame extends JFrame {
         ProdottoSetupFrame _this=this;
         JPanel sud=new JPanel();
         sud.setLayout(new FlowLayout());
-        JButton agc=new JButton("Aggiungi Prodotto");
-        sud.add(agc);
-        agc.addActionListener(new ActionListener() {
+        JButton agp=new JButton("Aggiungi Prodotto");
+        sud.add(agp);
+        agp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 _this.setVisible(false);
 
-               GestoreCatalogoBusiness.getInstance().inserimentoProdotti(txtNome.getText(),txtDescrzione.getText(),txtPrezzo.getText(),txtCategoria.getText(), Integer.parseInt(txtidProduttore.getText()),Integer.parseInt(txtidDistributore.getText()));
+               GestoreCatalogoBusiness.getInstance().inserimentoProdotti(txtNome.getText(),txtDescrzione.getText(),txtPrezzo.getText(),txtImmagine.getText(),txtSconto.getText(),txtCategoria.getText(), Integer.parseInt(txtidProduttore.getText()),Integer.parseInt(txtidDistributore.getText()));
                 new ListaProdottiFrame(g);
             }
         });
@@ -82,6 +92,15 @@ public class ProdottoSetupFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 _this.setVisible(false);
                 new ListaCategorieFrame(g);
+            }
+        });
+        JButton visualizzaProdotti=new JButton("Visualizza Prodotti");
+        sud.add(visualizzaProdotti);
+        visualizzaProdotti.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            _this.setVisible(false);
+            new ListaProdottiFrame(g);
             }
         });
         c.add(centro, BorderLayout.CENTER);
@@ -97,7 +116,7 @@ public class ProdottoSetupFrame extends JFrame {
         this.setLocation((screenSize.width / 2) - frameSize.width / 2 - 200, (screenSize.height / 2) - frameSize.height / 2 - 50);
 
 
-        setSize(400, 300);
+        setSize(500, 300);
 
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

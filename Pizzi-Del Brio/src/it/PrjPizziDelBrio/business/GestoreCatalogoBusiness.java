@@ -18,10 +18,16 @@ public class GestoreCatalogoBusiness  {
         CategoriaDAO.getInstance().insertCategoria(nomecategoria,gctemail);
         //JOptionPane.showMessageDialog(null, "Categoria aggiunta.");
     }
-    public void inserimentoProdotti(String nome,String descrizione,String prezzo,int idCarrello,String categoria ,int iprod,int idist){
-        ProdottoDAO.getInstance().insertProdotti(nome,descrizione,prezzo,idCarrello,categoria,iprod,idist);
+    public void inserimentoProdotti(String nome,String descrizione,String prezzo,String Immagine,String Sconto ,String categoria ,int iprod,int idist){
+        ProdottoDAO.getInstance().insertProdotti(nome,descrizione,prezzo,Immagine,Sconto,categoria,iprod,idist);
 
         }
+    public void rimuoviProdotti(String nome){
+        ProdottoDAO.getInstance().deleteProdotti(nome);
+    }
+    public void rimuoviCategorie(String nome){
+        ProdottoDAO.getInstance().deleteCategoria(nome);
+    }
 }
 
 

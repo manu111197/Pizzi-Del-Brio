@@ -21,7 +21,7 @@ public class CategoriaDAO implements ICategoriaDAO {
     @Override
     public Categoria findByNome(String nome){
 
-        ArrayList<String []> risultato = DbConnection.getInstance().eseguiQuery("SELECT * FROM Categoria WHERE nome="+nome+ "';");
+        ArrayList<String []> risultato = DbConnection.getInstance().eseguiQuery("SELECT * FROM Categoria WHERE nome='"+nome+ "';");
 
         if (risultato.size()==0) return null;
 

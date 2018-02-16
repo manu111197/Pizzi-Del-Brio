@@ -6,6 +6,8 @@ public class Prodotto {
     private String nome;
     private String descrizione;
     private String prezzo;
+    private String immagine;
+    private String sconto;
     private Carrello carrello;
     private Categoria categoria;
     private Produttore produttore;
@@ -35,10 +37,15 @@ public class Prodotto {
     public void setPrezzo(String prezzo) {
         this.prezzo = prezzo;
     }
-    public Carrello getCarrello() {
-        return carrello;
-    }
 
+    public String getImmagine() { return immagine; }
+
+    public void setImmagine(String immagine) { this.immagine = immagine;}
+
+    public String getSconto() { return sconto; }
+
+    public void setSconto(String sconto) { this.sconto = sconto; }
+    public Carrello getCarrello() { return carrello; }
     public void setCarrello(Carrello carrello) {
         this.carrello = carrello;
     }
@@ -51,9 +58,7 @@ public class Prodotto {
         this.categoria = categoria;
     }
 
-    public Produttore getProduttore() {
-        return produttore;
-    }
+    public Produttore getProduttore() { return produttore; }
 
     public void setProduttore(Produttore produttore) {
         this.produttore = produttore;
@@ -70,7 +75,5 @@ public class Prodotto {
         return prodottiContenuti;
     }
 
-    public void setProdottiContenuti(ArrayList<Prodotto> prodottiContenuti) {
-        this.prodottiContenuti = prodottiContenuti;
-    }
+    public void setProdottiContenuti(ArrayList<Prodotto> prodottiContenuti) { this.prodottiContenuti = prodottiContenuti; }
 }

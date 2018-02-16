@@ -1,5 +1,6 @@
 package it.PrjPizziDelBrio.view;
 
+import it.PrjPizziDelBrio.business.GestoreCatalogoBusiness;
 import it.PrjPizziDelBrio.dao.mysql.CategoriaDAO;
 import it.PrjPizziDelBrio.model.Categoria;
 import it.PrjPizziDelBrio.model.GestoreCatalogo;
@@ -39,18 +40,22 @@ public class ListaCategorieFrame extends JFrame {
         inserisciCategoria.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                _this.setVisible(false);
                 new CategoriaSetupFrame(g);
             }
         });
-        /*JButton rimuoviCategoria=new JButton("Rimuovi categoria");
+        JButton rimuoviCategoria=new JButton("Rimuovi categoria");
         sud.add(rimuoviCategoria);
         rimuoviCategoria.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int rigaselezionata = categorie.getSelectedRow();
+                int column=0;
+                int row = categorie.getSelectedRow();
+                String nome=(String) categorie.getModel().getValueAt(row,column);
+                GestoreCatalogoBusiness.getInstance().rimuoviCategorie(nome);
+                _this.setVisible(false);
+                new ListaCategorieFrame(g);
             }
-        });*/
+        });
         c.add(sud, BorderLayout.SOUTH);
 
 

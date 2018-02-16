@@ -8,10 +8,7 @@ import it.PrjPizziDelBrio.dao.mysql.RichiestaRegistrazioneDAO;
 import it.PrjPizziDelBrio.dao.mysql.UtenteDAO;
 import it.PrjPizziDelBrio.model.*;
 
-import it.PrjPizziDelBrio.view.AmministratoreFrame;
-import it.PrjPizziDelBrio.view.GestoreCatalogoFrame;
-import it.PrjPizziDelBrio.view.LoginFrame;
-import it.PrjPizziDelBrio.view.RegistrazioneFrame;
+import it.PrjPizziDelBrio.view.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -57,8 +54,10 @@ public class LoginListener implements ActionListener {
                         Utente u = (Utente) p;
                         if(UtenteBusiness.getInstance().isRegistrato(u)) {
                             System.out.println("Benvenuto utente " + u.getNome() + " " + u.getCognome() + "!");
-                            JOptionPane.showMessageDialog(null, "Benvenuto utente " + u.getNome() + " " + u.getCognome() + "!");
+                           // JOptionPane.showMessageDialog(null, "Benvenuto utente " + u.getNome() + " " + u.getCognome() + "!");
                             CarrelloBusiness.getInstance().inserimentoCarrello(email);
+                            finestra.setVisible(false);
+                            new CatalogoFrame(u);
                         }else
                             JOptionPane.showMessageDialog(null, "Utente non registrato");
 

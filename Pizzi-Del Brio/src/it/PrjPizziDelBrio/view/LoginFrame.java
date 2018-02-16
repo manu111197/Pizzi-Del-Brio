@@ -16,7 +16,7 @@ public class LoginFrame extends JFrame {
 
 
     public LoginFrame() {
-        super("Nuova finestra");
+        super("Finestra Login");
         Container c = getContentPane();
 
 
@@ -70,7 +70,7 @@ public class LoginFrame extends JFrame {
         c.add(centro, BorderLayout.CENTER);
         c.add(sud, BorderLayout.SOUTH);
 
-        JMenuBar bar = new JMenuBar();
+        /*JMenuBar bar = new JMenuBar();
         JMenu file = new JMenu("File");
         JMenu edit = new JMenu("Edit");
         JMenu move = new JMenu("Move");
@@ -84,7 +84,7 @@ public class LoginFrame extends JFrame {
         random.addActionListener(listener);
         random.setActionCommand("RANDOM_MENU_ITEM");
 
-        setJMenuBar(bar);
+        setJMenuBar(bar);*/
 
 
         LoginFrame _this= this;
@@ -99,7 +99,7 @@ public class LoginFrame extends JFrame {
         });
 
 
-        setSize(500,150);
+        setSize(500,130);
 
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -115,8 +115,5 @@ public class LoginFrame extends JFrame {
         return txtPassword;
     }
 
-    //promemoria classi annidate (nested)<<
-    public class Mia {
 
-    }
 }

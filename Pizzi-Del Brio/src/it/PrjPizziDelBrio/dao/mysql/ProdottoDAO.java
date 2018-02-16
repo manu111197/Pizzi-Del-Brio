@@ -30,10 +30,12 @@ public class ProdottoDAO implements IProdottoDAO {
         p.setNome(riga[0]);
         p.setDescrizione(riga[1]);
         p.setPrezzo(riga[2]);
-        p.setCarrello(CarrelloDAO.getInstance().findById(Integer.parseInt(riga[3])));
-        p.setCategoria(CategoriaDAO.getInstance().findByNome(riga[4]));
-        p.setProduttore(ProduttoreDAO.getInstance().findById(Integer.parseInt(riga[5])));
-        p.setDistributore(DistributoreDAO.getInstance().findById(Integer.parseInt(riga[6])));
+        p.setImmagine(riga[3]);
+        p.setSconto(riga[4]);
+//            p.setCarrello(CarrelloDAO.getInstance().findById(Integer.parseInt(riga[5])));
+        p.setCategoria(CategoriaDAO.getInstance().findByNome(riga[6]));
+        p.setProduttore(ProduttoreDAO.getInstance().findById(Integer.parseInt(riga[7])));
+        p.setDistributore(DistributoreDAO.getInstance().findById(Integer.parseInt(riga[8])));
 
         ArrayList<Prodotto> prodottiContenuti = new ArrayList<Prodotto>();
 
@@ -50,13 +52,16 @@ public class ProdottoDAO implements IProdottoDAO {
 
                 Prodotto p2 = new Prodotto();
 
-                p2.setNome(riga2[0]);
-                p2.setDescrizione(riga2[1]);
-                p2.setPrezzo(riga2[2]);
-                p2.setCarrello(CarrelloDAO.getInstance().findById(Integer.parseInt(riga2[3])));
-                p2.setCategoria(CategoriaDAO.getInstance().findByNome(riga2[4]));
-                p2.setProduttore(ProduttoreDAO.getInstance().findById(Integer.parseInt(riga2[5])));
-                p2.setDistributore(DistributoreDAO.getInstance().findById(Integer.parseInt(riga2[6])));
+                p2.setNome(riga[0]);
+                p2.setDescrizione(riga[1]);
+                p2.setPrezzo(riga[2]);
+                p2.setImmagine(riga[3]);
+                p2.setSconto(riga[4]);
+//            p2.setCarrello(CarrelloDAO.getInstance().findById(Integer.parseInt(riga[5])));
+                p2.setCategoria(CategoriaDAO.getInstance().findByNome(riga[6]));
+                p2.setProduttore(ProduttoreDAO.getInstance().findById(Integer.parseInt(riga[7])));
+                p2.setDistributore(DistributoreDAO.getInstance().findById(Integer.parseInt(riga[8])));
+
                 prodottiContenuti.add(p2);
             }
         }
@@ -81,18 +86,20 @@ public class ProdottoDAO implements IProdottoDAO {
             p.setNome(riga[0]);
             p.setDescrizione(riga[1]);
             p.setPrezzo(riga[2]);
-            p.setCarrello(CarrelloDAO.getInstance().findById(Integer.parseInt(riga[3])));
-            p.setCategoria(CategoriaDAO.getInstance().findByNome(riga[4]));
-            p.setProduttore(ProduttoreDAO.getInstance().findById(Integer.parseInt(riga[5])));
-            p.setDistributore(DistributoreDAO.getInstance().findById(Integer.parseInt(riga[6])));
+            p.setImmagine(riga[3]);
+            p.setSconto(riga[4]);
+//            p.setCarrello(CarrelloDAO.getInstance().findById(Integer.parseInt(riga[5])));
+            p.setCategoria(CategoriaDAO.getInstance().findByNome(riga[6]));
+            p.setProduttore(ProduttoreDAO.getInstance().findById(Integer.parseInt(riga[7])));
+            p.setDistributore(DistributoreDAO.getInstance().findById(Integer.parseInt(riga[8])));
 
             ArrayList<Prodotto> prodottiContenuti = new ArrayList<Prodotto>();
 
-            ArrayList<String[]> risultato2 = DbConnection.getInstance().eseguiQuery("SELECT nome, descrizione, prezzo, Carrello_idCarrello, Categoria_nome, Produttore_idProduttore, Distributore_idDistributore " +
-                    "FROM prodotto_has_prodotto as PC" +
+            ArrayList<String[]> risultato2 = DbConnection.getInstance().eseguiQuery("SELECT nome, descrizione, prezzo,Immagine,`Sconto eventuale`, Carrello_idCarrello, Categoria_nome, Produttore_idProduttore, Distributore_idDistributore " +
+                    "FROM prodotto_has_prodotto as PC " +
                     "JOIN  prodotto as P " +
                     "on  PC.Prodotto_Contenuto = P.nome " +
-                    "WHERE PC.Prodotto_Composto=" + riga[0]);
+                    "WHERE PC.Prodotto_Composto='" + riga[0]+"';");
 
             if (risultato2.size() != 0) {
                 Iterator<String[]> j = risultato2.iterator();
@@ -104,10 +111,13 @@ public class ProdottoDAO implements IProdottoDAO {
                     p2.setNome(riga2[0]);
                     p2.setDescrizione(riga2[1]);
                     p2.setPrezzo(riga2[2]);
-                    p2.setCarrello(CarrelloDAO.getInstance().findById(Integer.parseInt(riga2[3])));
-                    p2.setCategoria(CategoriaDAO.getInstance().findByNome(riga2[4]));
-                    p2.setProduttore(ProduttoreDAO.getInstance().findById(Integer.parseInt(riga2[5])));
-                    p2.setDistributore(DistributoreDAO.getInstance().findById(Integer.parseInt(riga2[6])));
+                    p2.setImmagine(riga2[3]);
+                    p2.setSconto(riga2[4]);
+//            p2.setCarrello(CarrelloDAO.getInstance().findById(Integer.parseInt(riga2[5])));
+                    p2.setCategoria(CategoriaDAO.getInstance().findByNome(riga2[6]));
+                    p2.setProduttore(ProduttoreDAO.getInstance().findById(Integer.parseInt(riga2[7])));
+                    p2.setDistributore(DistributoreDAO.getInstance().findById(Integer.parseInt(riga2[8])));
+
                     prodottiContenuti.add(p2);
                 }
             }
@@ -123,10 +133,17 @@ public class ProdottoDAO implements IProdottoDAO {
 
     }
 
-    public void insertProdotti(String nome, String descrizione, String prezzo,int idCarrello,String categoria, int idprod, int iddist) {
+    public void insertProdotti(String nome, String descrizione, String prezzo,String Immagine,String Sconto,String categoria, int idprod, int iddist) {
 
-        DbConnection.getInstance().eseguiAggiornamento("INSERT INTO Prodotto (nome,descrizione,prezzo,Carrello_idCarrello,Categoria_nome,Produttore_idProduttore,Distributore_idDistributore)" +
-                "VALUES '" + nome + "','" + descrizione + "','" + prezzo + "','" + idCarrello + "','" + categoria + "','" + idprod + "','" + iddist + "');");
+        DbConnection.getInstance().eseguiAggiornamento("INSERT INTO prodotto (nome,descrizione,prezzo,Immagine,`Sconto eventuale`,Categoria_nome,Produttore_idProduttore,Distributore_idDistributore) " +
+                "VALUES  ('"+ nome +"','"+ descrizione +"','"+ Float.parseFloat(prezzo) +"','"+Immagine+"','"+Float.parseFloat(Sconto)+"','"+ categoria +"',"+ idprod +","+ iddist +");");
+    }
+   public void deleteProdotti(String nome){
+        DbConnection.getInstance().eseguiAggiornamento("DELETE FROM prodotto WHERE nome='"+nome+"';");
+   }
+
+    public void deleteCategoria(String nome){
+        DbConnection.getInstance().eseguiAggiornamento("DELETE FROM categoria WHERE nome='"+nome+"';");
     }
 
 }

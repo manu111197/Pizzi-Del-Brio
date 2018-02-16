@@ -1,5 +1,6 @@
 package it.PrjPizziDelBrio.view;
 
+import it.PrjPizziDelBrio.business.GestoreCatalogoBusiness;
 import it.PrjPizziDelBrio.dao.mysql.ProdottoDAO;
 import it.PrjPizziDelBrio.model.GestoreCatalogo;
 import it.PrjPizziDelBrio.model.Prodotto;
@@ -34,23 +35,30 @@ public class ListaProdottiFrame extends JFrame{
 
             }
         });
-        JButton inserisciCategoria=new JButton("Inserisci prodotto");
-        sud.add(inserisciCategoria);
-        inserisciCategoria.addActionListener(new ActionListener() {
+        JButton inserisciProdotto=new JButton("Inserisci prodotto");
+        sud.add(inserisciProdotto);
+        inserisciProdotto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 _this.setVisible(false);
                 new ProdottoSetupFrame(g);
             }
         });
-        /*JButton rimuoviCategoria=new JButton("Rimuovi categoria");
-        sud.add(rimuoviCategoria);
-        rimuoviCategoria.addActionListener(new ActionListener() {
+
+        JButton rimuoviProdotto=new JButton("Rimuovi prodotto");
+        sud.add(rimuoviProdotto);
+       rimuoviProdotto.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int rigaselezionata = categorie.getSelectedRow();
+                int column = 0;
+                int row = prodotti.getSelectedRow();
+                String nome =(String) prodotti.getModel().getValueAt(row, column);
+                GestoreCatalogoBusiness.getInstance().rimuoviProdotti(nome);
+                _this.setVisible(false);
+                new ListaProdottiFrame(g);
+
             }
-        });*/
+        });
         c.add(sud, BorderLayout.SOUTH);
 
 

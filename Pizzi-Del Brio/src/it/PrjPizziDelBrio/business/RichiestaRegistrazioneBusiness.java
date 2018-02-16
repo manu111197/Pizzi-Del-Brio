@@ -15,7 +15,7 @@ public class RichiestaRegistrazioneBusiness {
         return instance;
     }
     public void inserimentoRichieste(String utEmail, String ammEmail){
-        if(!RichiestaRegistrazioneDAO.getInstance().findByUtente(utEmail).getStato().equals("confermata")) {
+        if(RichiestaRegistrazioneDAO.getInstance().findByUtente(utEmail)==null|| !RichiestaRegistrazioneDAO.getInstance().findByUtente(utEmail).getStato().equals("confermata")) {
             RichiestaRegistrazioneDAO.getInstance().inserimentoRichieste(utEmail, ammEmail);
             JOptionPane.showMessageDialog(null, "Registrazione inviata.");
         }

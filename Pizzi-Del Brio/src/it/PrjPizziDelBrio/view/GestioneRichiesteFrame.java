@@ -62,6 +62,16 @@ public class GestioneRichiesteFrame extends JFrame {
                 new GestioneRichiesteFrame(a);
             }
         });
+        JButton indietro=new JButton("Indietro");
+        sud.add(indietro);
+        indietro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                _this.setVisible(false);
+                new AmministratoreFrame(a);
+
+            }
+        });
 
         c.add(sud, BorderLayout.SOUTH);
 

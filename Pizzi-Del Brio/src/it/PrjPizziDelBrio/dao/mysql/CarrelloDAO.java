@@ -55,7 +55,7 @@ public class CarrelloDAO implements ICarrelloDAO {
     }
     public void insertCarrello( String utEmail){
 
-        DbConnection.getInstance().eseguiAggiornamento("INSERT INTO Carrello (idCarrello,Utente_email) " +
+        DbConnection.getInstance().eseguiAggiornamento("INSERT INTO Carrello (Utente_email) " +
                 "VALUES ('"+utEmail+"');");
 
     }
